@@ -1,0 +1,28 @@
+function loadCart() {
+    let table = document.getElementById("cartTable");
+
+    if (!table) return;
+
+    let cartData = JSON.parse(localStorage.getItem("cart")) || [];
+
+    table.innerHTML = "";
+
+    let total = 0;
+
+    for(let i = 0; i < cartData.length; i++) {
+
+        total += Number(cartData[i].price);
+
+        table.innerHTML += `
+        <tr>
+            <td>${cartData[i].name}</td>
+            <td>₹${cartData[i].price}</td>
+            <td>
+                <button onclick="removeItem(${i})">Remove</button>
+            </td>
+        </tr>`;
+    }
+
+    document.getElementById("total").innerText =
+        "Total: ₹" + total;
+}
